@@ -1,5 +1,5 @@
-# dependencies
-./node_modules
+# dependenc
+node_modules
 
 # local env files
 .env
