@@ -15,6 +15,8 @@ import Communities from './screens/communityScreen/Communities';
 import BottomNavigation from './navigations/BottomNavigation';
 import Communitposts from './screens/communityScreen/Communitposts';
 import Createpost from './screens/communityScreen/Createpost';
+import Updateprofile from './screens/profileScreens/Updateprofile';
+import Createcommunity from './screens/uploadScreen/Createcommunity';
 
 const Stack = createNativeStackNavigator();
 
@@ -58,9 +60,13 @@ const App = () => {
         <Stack.Screen name="login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="register" component={RegisterScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Communities" component={Communities} options={{ headerShown: false }} />
-        <Stack.Screen name="profile" component={Profile} options={{ headerShown: false }} />
+        <Stack.Screen name="profile" component={Profile}/>
         <Stack.Screen name="createpost" component={Createpost}  />
         <Stack.Screen name="communitposts" component={Communitposts}  />
+        <Stack.Screen name="updateprofile" component={Updateprofile}  />
+        <Stack.Screen name="createcommunity" component={Createcommunity}  />
+
+
         <Stack.Screen name="main" component={BottomNavigation} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>

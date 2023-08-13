@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const Createpost = () => {
+const Createpost = ({navigation}) => {
 
     const [title , setTitle]= useState('namendhjdsjh');
     const [content,setContent] = useState('hsdhv sdjcjdscsdncmds cm dsjkcnsdkncm mds ckjwsckls sk cdsjkclsncs csdklmcmw lwvopd wkldlsc msd clowkdejfv kswkfd');
@@ -16,9 +16,9 @@ const Createpost = () => {
             title,
             content,
         }
-        axios.post(`http://192.168.55.107:7080/createcommunityposts/${id}`, data, { headers: { 'content-type': 'application/json','Authorization': value } }).then((response) => {
-          console.log(response)
-        }).catch((error) => {
+        axios.post(`http://192.168.151.38:7080/createcommunityposts/${id}`, data, { headers: { 'content-type': 'application/json','Authorization': value } }).then((response) => {
+          navigation.goBack();
+      }).catch((error) => {
             console.log(error.response.data);
         })
     }

@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const Createpost = () => {
+const Explore = () => {
   return (
     <View>
-      <Text>Createpost</Text>
+      <Text>Explore</Text>
     </View>
   )
 }
 
-export default Createpost
+export default Explore
 
 const styles = StyleSheet.create({})

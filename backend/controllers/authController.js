@@ -1,44 +1,42 @@
 import User from "../models/authModel.js"
 import bcrypt from 'bcrypt'
+import profileDetails from "../models/profiledetailsModel.js"
 
 
-export const Profile = (req, res) => {
-    try {
-        const user = req.user
-        res.status(201).json(
-            user
-        )
-    } catch (error) {
-        res.status(500).json(error)
-    }
-}
 
 export const Register = async (req, res) => {
     try {
         const { email, username, password } = req.body
+
+      const user = await User.findOne({ username });
+
+      if (user) {
+        return res.status(404).json("username already taken");
+      } 
+      
         const newUser = new User({
             email,
             password,
             username
         })
+        const newprofileDetails = new profileDetails({
+          user:newUser
+        })
+        await newprofileDetails.save()
         await newUser.save()
         const token = newUser.generateToken()
         res.status(201).json({
             user: newUser,
+            profiledetails:newprofileDetails,
             token,
             message: 'user registerd successfully'
         })
     } catch (error) {
-      if (error.code === 11000 && error.keyValue && error.keyPattern) {
-        const { username } = error.keyValue;
-        const key = Object.keys(error.keyPattern)[0];
-        const errorMessage = `The ${key} '${username}' is already taken.`;
-        res.status(500).json({ message: 'An error occurred during registration', errorMessage });
-        
-      } else {
-        res.status(500).json({ message: 'An error occurred during registration', error });
+     
 
-      }
+        res.status(500).json('An error occurred during registration');
+
+      
     } 
 }
 
@@ -50,7 +48,7 @@ export const Login = async (req, res) => {
       const user = await User.findOne({ email });
   
       if (!user) {
-        return res.status(404).json("User not found");
+        return res.status(404).json("Invalid credentials");
       }
   
       const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -66,7 +64,6 @@ export const Login = async (req, res) => {
         message: "User login successful"
       });
     } catch (error) {
-      console.log(error);
       res.status(500).json("Server Error");
     }
   };

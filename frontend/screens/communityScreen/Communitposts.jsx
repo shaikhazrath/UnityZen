@@ -13,7 +13,7 @@ const Communitposts = ({navigation}) => {
 
     const getCommunityPosts = async (value) => {
         try {
-          const response = await axios.get(`http://192.168.55.107:7080/getcommunityposts/${communityId}`, {
+          const response = await axios.get(`http://192.168.151.38:7080/getcommunityposts/${communityId}`, {
             headers: {
               'content-type': 'application/json',
               'Authorization': value,

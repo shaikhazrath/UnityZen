@@ -42,7 +42,6 @@ export const createCommunityPost = async(req,res)=>{
         const id = req.params.id
        const  user = req.user
         const {title,content} = req.body
-        console.log(title,content,user,id)
         const newPost = new Post({
             title,
             content,
