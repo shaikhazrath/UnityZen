@@ -2,8 +2,9 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity,Image } from 'react-
 import React, { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import Header from '../../components/Header';
 
-const Communities = ({ navigation }) => {
+const HomeScreen = ({ navigation }) => {
   const [UserCommunity, setUserCommunity] = useState();
   const [loading, setLoading] = useState(true);
 4
@@ -45,6 +46,7 @@ const Communities = ({ navigation }) => {
 
   return (
     <View>
+      <Header/>
       {loading ? (
         <Text>Loading...</Text>
       ) : (
@@ -76,6 +78,6 @@ const Communities = ({ navigation }) => {
   )
 }
 
-export default Communities
+export default HomeScreen
 
 const styles = StyleSheet.create({})

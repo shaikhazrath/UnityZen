@@ -1,6 +1,5 @@
 import User from "../models/authModel.js"
 import bcrypt from 'bcrypt'
-import profileDetails from "../models/profiledetailsModel.js"
 
 
 
@@ -9,34 +8,31 @@ export const Register = async (req, res) => {
         const { email, username, password } = req.body
 
       const user = await User.findOne({ username });
-
       if (user) {
         return res.status(404).json("username already taken");
       } 
-      
         const newUser = new User({
             email,
             password,
             username
         })
+
         const newprofileDetails = new profileDetails({
           user:newUser
         })
+        
         await newprofileDetails.save()
+        
         await newUser.save()
+
         const token = newUser.generateToken()
         res.status(201).json({
             user: newUser,
-            profiledetails:newprofileDetails,
             token,
             message: 'user registerd successfully'
         })
     } catch (error) {
-     
-
-        res.status(500).json('An error occurred during registration');
-
-      
+        res.status(500).json(error);
     } 
 }
 

@@ -1,4 +1,4 @@
-import profileDetails from '../models/profiledetailsModel.js';
+import profile from '../models/profileModel.js';
 import User from "../models/authModel.js"
 import cloudinary from 'cloudinary'; 
 import fs from 'fs/promises'; 
@@ -6,10 +6,9 @@ import fs from 'fs/promises';
 export const Profile = async(req, res) => {
     try {
       const user = await User.findById(req.user._id); 
-        const profiledetails = await profileDetails.findOne({ user });
-
+        const profiledata = await profile.findOne({ user });
         res.status(201).json({
-          profiledetails,
+          profiledata,
           user
         }
         )
